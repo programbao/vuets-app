@@ -31,7 +31,7 @@ import { State, Getter, Mutation, Action } from "vuex-class";
 export default class LayoutHeader extends Vue {
   @Getter("user") getUser: any;
   created() {
-    console.log(this.getUser);
+    // console.log(this.getUser);
   }
 
   userCommand(command: string): void {
@@ -41,7 +41,7 @@ export default class LayoutHeader extends Vue {
       (this as any).$router.replace("/login");
     }
 
-    if (command === "usercenter") console.log("个人中心");
+    if (command === "usercenter") this.$router.push("/user");
   }
 }
 </script>
