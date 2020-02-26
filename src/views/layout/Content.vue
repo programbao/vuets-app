@@ -11,8 +11,12 @@
         <i class="fa fa-reorder"></i>
         <!-- 属性separator 代表用什么来分割内容 -->
         <el-breadcrumb class="breadcrumb" separator="/">
-          <el-breadcrumb-item v-for="(item,index) in breadCrumbItems" :key="index"
-          :to='{path: item.path}'>{{item.title}}</el-breadcrumb-item>
+          <el-breadcrumb-item
+            v-for="(item, index) in breadCrumbItems"
+            :key="index"
+            :to="{ path: item.path }"
+            >{{ item.title }}</el-breadcrumb-item
+          >
         </el-breadcrumb>
       </div>
       <!-- 页面内容 -->
@@ -53,7 +57,6 @@ export default class Content extends Vue {
     }
 
     this.breadCrumbItems = breadCrumbItems;
-    console.log(this.breadCrumbItems);
   }
 }
 </script>

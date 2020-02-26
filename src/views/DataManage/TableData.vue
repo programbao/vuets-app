@@ -1,14 +1,205 @@
 <template>
+  <!-- <el-scrollbar> -->
   <div class="table-data">
-    TableData
+    <div class="table-data">
+      <div class="search-box">
+        <el-input
+          size="small"
+          v-model="searchVal"
+          placeholder="请输入课程名称检索"
+        ></el-input>
+        <el-button
+          size="small"
+          type="primary"
+          icon="el-icon-search"
+          @click="handleSearch"
+          >搜索</el-button
+        >
+      </div>
+      <el-table
+        :data="tableData"
+        border
+        style="width: 100%"
+        :height="tHeight"
+        class="table-box"
+      >
+        <el-table-column type="index" label="序号" width="60"></el-table-column>
+        <el-table-column label="课程名称" prop="title"></el-table-column>
+        <el-table-column label="课程等级" prop="level"></el-table-column>
+        <el-table-column
+          label="技术栈"
+          width="120"
+          prop="type"
+        ></el-table-column>
+        <el-table-column
+          label="报名人数"
+          width="120"
+          prop="count"
+        ></el-table-column>
+        <el-table-column
+          label="上线日期"
+          width="160"
+          prop="date"
+        ></el-table-column>
+
+        <el-table-column label="操作" width="160">
+          <template slot-scope="scope">
+            <el-button @click="handleEdit(scope.$index, scope.row)" size="mini">
+              编辑
+            </el-button>
+            <el-button
+              @click="handleDelete(scope.$index, scope.row)"
+              size="mini"
+              type="danger"
+            >
+              删除
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pages" ref="page-box">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :page-sizes="[5, 10, 20]"
+          :page-size="size"
+          layout="total,sizes,prev,pager,next,jumper"
+          :total="total"
+        ></el-pagination>
+      </div>
+    </div>
+    <EditDialog
+      @closeDialog="closeDialog"
+      :dialogVisible="dialogVisible"
+      :form="formData"
+    ></EditDialog>
   </div>
+  <!-- </el-scrollbar> -->
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import EditDialog from "./EditDialog.vue";
 
-@Component
-export default class TableData extends Vue {}
+@Component({
+  components: { EditDialog }
+})
+export default class TableData extends Vue {
+  private searchVal: string = ""; //收缩框
+  private tHeight: number = document.body.offsetHeight - 270;
+  private tableData: any = []; //表格数据
+  private page: number = 1; // 当前page
+  private size: number = 5; // 请求数据的个数 默认为5
+  private total: number = 0; // 总数据条数
+  private dialogVisible: boolean = false; // 是否展示编辑页面
+  private formData: object = {
+    title: "",
+    type: "",
+    level: "",
+    count: "",
+    date: ""
+  };
+
+  created() {
+    this.loadData();
+  }
+
+  // 加载数据
+  loadData() {
+    (this as any)
+      .$axios(`api/profiles/loadMore/${this.page}/${this.size}`)
+      .then((res: any) => {
+        this.tableData = res.data.data.list;
+        console.log(this.tableData);
+        this.total = res.data.data.total;
+      });
+  }
+
+  // 改变页面显示条数
+  handleSizeChange(val: number): void {
+    this.size = val;
+    console.log(this.size);
+    this.page = 1;
+    this.searchVal ? this.loadSearchData() : this.loadData();
+  }
+
+  // 切换页码
+  handleCurrentChange(val: number): void {
+    this.page = val;
+    this.loadData();
+    this.searchVal ? this.loadSearchData() : this.loadData();
+  }
+
+  // 搜索
+  handleSearch(): void {
+    // 点击搜索
+    this.page = 1;
+    this.searchVal ? this.loadSearchData() : this.loadData();
+    // this.loadSearchData();
+  }
+  loadSearchData() {
+    // 加载搜索数据
+    (this as any)
+      .$axios(
+        `/api/profiles/search/${this.searchVal}/${this.page}/${this.size}`
+      )
+      .then((res: any) => {
+        console.log(res.data);
+        this.tableData = res.data.datas.list;
+        this.total = res.data.datas.total;
+      });
+  }
+
+  // 编辑
+  handleEdit(index: number, row: any) {
+    console.log(index, row);
+    this.formData = row;
+    this.dialogVisible = true;
+  }
+
+  // 删除
+  handleDelete(index: number, row: any) {
+    (this as any).$axios
+      .delete(`/api/profiles/delete/${row._id}`)
+      .then((res: any) => {
+        (this as any).$message({
+          message: res.data.msg,
+          type: "success"
+        });
+      });
+    this.tableData.splice(index, 1);
+  }
+
+  closeDialog() {
+    this.dialogVisible = false;
+  }
+}
 </script>
-
-<style lang="less" scoped></style>
+<style lang="scss" scoped>
+.table-data {
+  height: 100%;
+  .table-box {
+    font-size: 14px;
+  }
+  .pages {
+    background: #fff;
+    margin-top: 10px;
+    padding: 10px 10px;
+    text-align: right;
+    height: 55px;
+    box-sizing: border-box;
+  }
+  .search-box {
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 10px 10px;
+    border-radius: 4px;
+    height: 55px;
+    box-sizing: border-box;
+    .el-input {
+      width: 200px;
+      margin-right: 10px;
+    }
+  }
+}
+</style>

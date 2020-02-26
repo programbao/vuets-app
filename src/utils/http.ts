@@ -11,7 +11,7 @@ import router from "@/router";
 
 //  创建 axios 的实例
 const service = axios.create({
-  timeout: 15000 // 超时时间
+  timeout: 20000 // 超时时间
 }); // 记： 创建请求时间的用法不是很清楚，以及响应时会出现这里超时的判断，会导致响应不出状态结果 err.response.status的状态返回不了
 
 // 请求拦截器
