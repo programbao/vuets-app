@@ -17,6 +17,7 @@
         >
       </div>
       <el-table
+        v-loading="loading"
         :data="tableData"
         border
         style="width: 100%"
@@ -92,6 +93,7 @@ export default class TableData extends Vue {
   private size: number = 5; // 请求数据的个数 默认为5
   private total: number = 0; // 总数据条数
   private dialogVisible: boolean = false; // 是否展示编辑页面
+  private loading: boolean = true; // 是否显示加载
   private formData: object = {
     title: "",
     type: "",
@@ -106,12 +108,18 @@ export default class TableData extends Vue {
 
   // 加载数据
   loadData() {
-    (this as any)
-      .$axios(`api/profiles/loadMore/${this.page}/${this.size}`)
+    this.loading = true;
+    (this as any).$axios
+      .get(`api/profiles/loadMore/${this.page}/${this.size}`)
       .then((res: any) => {
+        console.log(res.data);
         this.tableData = res.data.data.list;
-        console.log(this.tableData);
         this.total = res.data.data.total;
+        this.loading = false;
+      })
+      .catch((err: any) => {
+        this.loading = false;
+        console.log(err);
       });
   }
 
@@ -138,6 +146,7 @@ export default class TableData extends Vue {
     // this.loadSearchData();
   }
   loadSearchData() {
+    this.loading = true;
     // 加载搜索数据
     (this as any)
       .$axios(
@@ -147,6 +156,7 @@ export default class TableData extends Vue {
         console.log(res.data);
         this.tableData = res.data.datas.list;
         this.total = res.data.datas.total;
+        this.loading = false;
       });
   }
 

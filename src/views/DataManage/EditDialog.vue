@@ -75,11 +75,9 @@ export default class EidtDialog extends Vue {
     _id: string;
   };
   private rules: any = {
-    title: [
-      { required: true, message: "请输入课程名称", trigger: "blur" },
-      { required: true, message: "请输入课程等级", trigger: "change" },
-      { required: true, message: "请输入报名人数", trigger: "blur" }
-    ],
+    title: [{ required: true, message: "请输入课程名称", trigger: "blur" }],
+    level: [{ required: true, message: "请输入课程等级", trigger: "change" }],
+    count: [{ required: true, message: "请输入报名人数", trigger: "blur" }],
     date: [
       {
         type: "string",
