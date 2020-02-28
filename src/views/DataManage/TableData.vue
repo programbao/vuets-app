@@ -43,7 +43,11 @@
           prop="date"
         ></el-table-column>
 
-        <el-table-column label="操作" width="160">
+        <el-table-column
+          label="操作"
+          v-if="getUser.key != 'visitor'"
+          width="160"
+        >
           <template slot-scope="scope">
             <el-button @click="handleEdit(scope.$index, scope.row)" size="mini">
               编辑
@@ -81,11 +85,13 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import EditDialog from "./EditDialog.vue";
+import { State, Getter, Mutation, Action } from "vuex-class";
 
 @Component({
   components: { EditDialog }
 })
 export default class TableData extends Vue {
+  @Getter("user") getUser: any;
   private searchVal: string = ""; //收缩框
   private tHeight: number = document.body.offsetHeight - 270;
   private tableData: any = []; //表格数据
