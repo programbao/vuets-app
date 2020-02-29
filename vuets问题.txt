@@ -1,0 +1,25 @@
+1. 在使用组件的时候，一定要引用声明，然后注册；不然少一步就使用组件的话，就会报错（未知元素）：Unknown custom element: <your-component-name>- did you register the component correctly? For recursive components, make sure to provide the "name" option.
+2.使用插槽solt时如果出现错误，那就重写几篇，在看下行不行
+
+3. elementUI -- type 注意设置，如果设置了，就会按照这里的类型类循环
+例如：type=‘index’时，无论你怎么设置prop，都会走type中索引从1开始循环添加数据，所以，一般要设置prop的地方都不设置type
+
+4.elementUI ：报错 Error in nextTick: "TypeError: Cannot read property 'key' of undefined；是因为分页的时候total写错字母，导致无法识别；然后就会无限循环提示添加key，（细节问题，没有注意单词的书写）---如果写这些外部引入的框架，如果词语比较长的话，能复制粘贴就复制粘贴； 教训如果报错先判断字母单词有没有写错（怎么对： 两个两个的看）
+
+5.Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "dialogVisible"（父传子数据，传输数据时出现错误---不能直接在父组改子组的数据？？）
+
+
+
+6. Duplicate keys detected: 'tab-line'. This may cause an update error.
+（使用el-element时 el-tab-pane中的name如果一样的话，会报重，也就是使用重复，要你检查重复健（Duplicate keys detected））
+
+
+7.vue+axios 请求处理中，超时处理时 响应拦截error.response 是没有定义的，还有设置.retry也是没有用的（好像），如果请求超时，不能看判断error.response.status 中的状态来判断，要另外处理请求超时的处理（err.code === "ECONNABORTED"）
+
+
+
+8. es6 中filter的作用是通过 判断true和false来返回数组中的子元素，就像判断 var arr = [1, 2, 4, 5, 6, 9, 10, 15];
+var r = arr.filter(function (x) {
+    return x % 2 !== 0;
+});
+r; // [1, 5, 9, 15]
