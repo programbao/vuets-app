@@ -5,7 +5,13 @@
     <!-- 内容 -->
     <Content>
       <Sidebar slot="left"></Sidebar>
+<<<<<<< HEAD
       <router-view slot="content" />
+=======
+      <!-- <el-scrollbar> -->
+      <router-view slot="content" />
+      <!-- </el-scrollbar> -->
+>>>>>>> dcbef54... feat(product_list/import_list)
     </Content>
   </div>
 </template>

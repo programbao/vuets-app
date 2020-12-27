@@ -25,4 +25,18 @@ export default class App extends Vue {
   height: 100%;
   // background-color: #e3e3e3;
 }
+<<<<<<< HEAD
+=======
+
+// 设置scroll样式
+.content {
+  min-width: 900px;
+}
+.el-table__body-wrapper .is-scrolling-left {
+  overflow-x: hidden;
+}
+.el-main .el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+>>>>>>> dcbef54... feat(product_list/import_list)
 </style>

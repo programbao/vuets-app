@@ -3,7 +3,11 @@
     <div class="home-body">
       <h4 class="title">管理系统</h4>
       <p class="des">每个人都应该学习编程</p>
+<<<<<<< HEAD
       <el-button>进入学习</el-button>
+=======
+      <el-button type="primary" @click="open">进入学习</el-button>
+>>>>>>> dcbef54... feat(product_list/import_list)
     </div>
   </div>
 </template>
@@ -16,6 +20,20 @@ export default class Home extends Vue {
   //   // 记： 从新窗口打开
   //   window.open();
   // }
+<<<<<<< HEAD
+=======
+  open() {
+    (this as any).$alert('对不起暂无', '学习内容', {
+      confirmButtonText: '确定',
+      callback: (action: any) => {
+        (this as any).$message({
+          type: 'info',
+          message: `完成操作`
+        });
+      }
+    });
+  }
+>>>>>>> dcbef54... feat(product_list/import_list)
 }
 </script>
 

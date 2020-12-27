@@ -3,7 +3,7 @@
     <div class="add-box">
       <el-button @click="addAccount" type="primary">新增用户</el-button>
     </div>
-    <el-table :data="tableData" border style="width: 100%">
+    <el-table :data="tableData" border style="width: 100%" v-loading="loading">
       <el-table-column label="角色" width="180">
         <template slot-scope="scope">
           <el-select
@@ -46,7 +46,7 @@
             size="mini"
             >完成</el-button
           >
-          <el-button @click="handleDelete" size="mini" type="danger"
+          <el-button @click="handleDelete(scope.$index, scope.row)" size="mini" type="danger"
             >删除</el-button
           >
         </template>
@@ -73,6 +73,7 @@ import AddAccount from "./AddAccount.vue";
 export default class AccountData extends Vue {
   private tableData: any = [];
   private dialogVisible: boolean = false;
+  private loading: boolean = true; // 是否显示加载
   // select 数据
   private options: any = [
     {
@@ -102,15 +103,16 @@ export default class AccountData extends Vue {
   }
 
   handleDelete(index: number, row: any) {
+
+    this.tableData.splice(index, 1);
     // 删除
-    (this as any)
+    (this as any).$axios
       .post(`api/users/deleteUser/${row._id}`, row)
       .then((res: any) => {
         (this as any).$message({
           message: res.data.msg,
           type: "success"
         });
-
         this.tableData.splice(index, 1);
       });
   }
@@ -138,7 +140,10 @@ export default class AccountData extends Vue {
   }
 
   getData() {
+
+    this.loading = true;
     (this as any).$axios("/api/users/allUsers").then((res: any) => {
+      this.loading = false
       // 设置编辑状态
       res.data.datas.forEach((item: any) => {
         item.edit = false;

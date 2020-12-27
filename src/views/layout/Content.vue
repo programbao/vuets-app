@@ -20,10 +20,19 @@
         </el-breadcrumb>
       </div>
       <!-- 页面内容 -->
+<<<<<<< HEAD
       <div class="content">
         <!-- <solt name="content"></solt> -->
         <slot name="content"></slot>
       </div>
+=======
+      <el-scrollbar>
+        <div class="content">
+          <!-- <solt name="content"></solt> -->
+          <slot name="content"></slot>
+        </div>
+      </el-scrollbar>
+>>>>>>> dcbef54... feat(product_list/import_list)
     </el-main>
   </el-container>
 </template>
@@ -62,6 +71,12 @@ export default class Content extends Vue {
 </script>
 
 <style lang="scss" scoped>
+<<<<<<< HEAD
+=======
+.el-scrollbar {
+  height: calc(100% - 120px);
+}
+>>>>>>> dcbef54... feat(product_list/import_list)
 .layout-content {
   width: 100%;
   height: 100%;

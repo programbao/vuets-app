@@ -103,6 +103,49 @@ export const asyncRouterMap = [
       }
     ]
   },
+<<<<<<< HEAD
+=======
+  // 商品列表
+  {
+    path: "/productManage",
+    name: "productManage",
+    hidden: true,
+    component: Layout,
+    redirect: "/ProductData",
+    children: [
+      {
+        path: "/ProductData",
+        name: "ProductData",
+        meta: {
+          title: "商品管理",
+          icon: "fa fa-user-plus",
+          roles: ["admin"]
+        },
+        component: () => import("@/views/ProductManage/productList.vue")
+      }
+    ]
+  },
+  // 商品添加
+  {
+    path: "/importProduct",
+    name: "importProduct",
+    hidden: true,
+    component: Layout,
+    redirect: "/importProduct",
+    children: [
+      {
+        path: "/importProduct",
+        name: "importProduct",
+        meta: {
+          title: "商品管理",
+          icon: "fa fa-user-plus",
+          roles: ["admin"]
+        },
+        component: () => import("@/views/ProductManage/importProduct.vue")
+      }
+    ]
+  },
+>>>>>>> dcbef54... feat(product_list/import_list)
   // 404 路由
   {
     path: "/404",

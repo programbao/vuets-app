@@ -6,7 +6,11 @@
         <el-input
           size="small"
           v-model="searchVal"
+<<<<<<< HEAD
           placeholder="请输入课程名称检索"
+=======
+          placeholder="请输入内容名称检索"
+>>>>>>> dcbef54... feat(product_list/import_list)
         ></el-input>
         <el-button
           size="small"
@@ -25,20 +29,33 @@
         class="table-box"
       >
         <el-table-column type="index" label="序号" width="60"></el-table-column>
+<<<<<<< HEAD
         <el-table-column label="课程名称" prop="title"></el-table-column>
         <el-table-column label="课程等级" prop="level"></el-table-column>
+=======
+        <el-table-column label="内容名称" prop="title"></el-table-column>
+        <el-table-column label="内容级别" prop="level"></el-table-column>
+>>>>>>> dcbef54... feat(product_list/import_list)
         <el-table-column
           label="技术栈"
           width="120"
           prop="type"
         ></el-table-column>
         <el-table-column
+<<<<<<< HEAD
           label="报名人数"
+=======
+          label="计划时长"
+>>>>>>> dcbef54... feat(product_list/import_list)
           width="120"
           prop="count"
         ></el-table-column>
         <el-table-column
+<<<<<<< HEAD
           label="上线日期"
+=======
+          label="开始时间"
+>>>>>>> dcbef54... feat(product_list/import_list)
           width="160"
           prop="date"
         ></el-table-column>
@@ -118,14 +135,20 @@ export default class TableData extends Vue {
     (this as any).$axios
       .get(`api/profiles/loadMore/${this.page}/${this.size}`)
       .then((res: any) => {
+<<<<<<< HEAD
         console.log(res.data);
+=======
+>>>>>>> dcbef54... feat(product_list/import_list)
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
         this.loading = false;
       })
       .catch((err: any) => {
         this.loading = false;
+<<<<<<< HEAD
         console.log(err);
+=======
+>>>>>>> dcbef54... feat(product_list/import_list)
       });
   }
 

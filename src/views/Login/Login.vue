@@ -92,7 +92,13 @@ export default class Login extends Vue {
     username: [{ required: true, message: "请输入账号", trigger: "blur" }],
     pwd: [{ required: true, message: "请输入密码", trigger: "blur" }]
   };
+<<<<<<< HEAD
 
+=======
+  created(){
+    this.open2()
+  }
+>>>>>>> dcbef54... feat(product_list/import_list)
   handleSubmit(): void {
     (this.$refs["ruleForm"] as any).validate((valid: boolean) => {
       if (valid) {
@@ -118,6 +124,18 @@ export default class Login extends Vue {
       }
     });
   }
+<<<<<<< HEAD
+=======
+  // 提示消息
+  open2() {
+    (this as any).$notify({
+      title: '警告',
+      message: '初始账号是：admin ;密码是：123456',
+      type: 'warning',
+       duration: 0
+    });
+  }
+>>>>>>> dcbef54... feat(product_list/import_list)
 }
 </script>
 

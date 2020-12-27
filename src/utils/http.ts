@@ -12,7 +12,12 @@ import router from "@/router";
 //  创建 axios 的实例
 const service: any = axios.create({
   // 请求头，超时设置，是否跨域验证，async-await设置---都在创建实例时设置
+<<<<<<< HEAD
   timeout: 30 * 1000 // 超时时间 --- 10秒
+=======
+  timeout: 20 * 1000, // 超时时间 --- 10秒
+  // baseURL: "https://bs.xiaobaozj.cn/api"
+>>>>>>> dcbef54... feat(product_list/import_list)
 }); // 记： 创建请求时间的用法不是很清楚，以及响应时会出现这里超时的判断，会导致响应不出状态结果 err.response.status的状态返回不了
 
 // 请求拦截器
@@ -39,9 +44,22 @@ service.interceptors.response.use(
     let errMsg = "";
     console.log(err);
     console.log(err.code);
+<<<<<<< HEAD
     if (err.code === "ECONNABORTED") Promise.reject(err);
     Message.error("请求超时或服务器异常，请检查网络或联系管理员！");
     return;
+=======
+    if (err.code === "ECONNABORTED") {
+      Promise.reject(err)
+      Message.error("请求超时，请检查网络");
+      let outTime = setTimeout(() => {
+        Message.error("如果多次连接不了，请联系管理员");
+        clearTimeout(outTime)
+      },2000)
+    }
+    //
+    // return;
+>>>>>>> dcbef54... feat(product_list/import_list)
     if (err && err.response.status) {
       switch (err.response.status) {
         case 401:
@@ -74,7 +92,11 @@ service.interceptors.response.use(
           errMsg = "HTTP版本不受支持";
           break;
         default:
+<<<<<<< HEAD
           errMsg = err.response.data.msg;
+=======
+          errMsg = "请求超时或服务器异常，请检查网络或联系管理员!"
+>>>>>>> dcbef54... feat(product_list/import_list)
           break;
       }
     } else {

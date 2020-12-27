@@ -5,7 +5,11 @@
       <div class="info">
         <div class="title">
           <img src="@/assets/logo.png" alt />
+<<<<<<< HEAD
           <span>小包在线</span>
+=======
+          <span>宝在线</span>
+>>>>>>> dcbef54... feat(product_list/import_list)
         </div>
         <div class="detail">
           <span>我在学习vue，学习typscript，学习语法，学习node，学习很多难搞的东西，有点困难</span>
@@ -58,7 +62,11 @@ export default class LayoutHeader extends Vue {}
           sans-serif;
         font-weight: 600;
         img {
+<<<<<<< HEAD
           width: 200px;
+=======
+          width: 70px;
+>>>>>>> dcbef54... feat(product_list/import_list)
           padding-bottom: 3px;
         }
       }

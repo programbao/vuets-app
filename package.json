@@ -13,7 +13,11 @@
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "echarts": "^4.6.0",
+<<<<<<< HEAD
     "element-ui": "^2.13.0",
+=======
+    "element-ui": "^2.10.1",
+>>>>>>> dcbef54... feat(product_list/import_list)
     "jwt-decode": "^2.2.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",

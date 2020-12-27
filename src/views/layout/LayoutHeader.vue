@@ -41,7 +41,11 @@ export default class LayoutHeader extends Vue {
       (this as any).$router.replace("/login");
     }
 
+<<<<<<< HEAD
     if (command === "usercenter") this.$router.push("/user");
+=======
+    if (command === "usercenter") (this as any).$router.push("/user");
+>>>>>>> dcbef54... feat(product_list/import_list)
   }
 }
 </script>
